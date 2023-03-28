@@ -23,7 +23,7 @@ sources:
   - https://ghcr.io/onedr0p/jackett
   - https://github.com/Jackett/Jackett
 type: application
-version: 0.20.3684
+version: 1.0.1
 annotations:
   truecharts.org/catagories: |
     - media
