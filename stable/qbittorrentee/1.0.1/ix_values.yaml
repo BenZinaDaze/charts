@@ -1,0 +1,45 @@
+image:
+  repository: superng6/qbittorrentee
+  pullPolicy: IfNotPresent
+  tag: 4.5.2.10@sha256:ccdd68c96d5b8a5890f1cf4d1b566ec67e320ec2f633347ebc6cc13d392615c1
+
+securityContext:
+  readOnlyRootFilesystem: false
+
+service:
+  main:
+    ports:
+      main:
+        port: 8080
+        targetPort: 8080
+  torrent:
+    enabled: true
+    ports:
+      torrent:
+        enabled: true
+        port: 6881
+        protocol: TCP
+      torrentudp:
+        enabled: true
+        port: 6881
+        protocol: UDP
+
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+
+additionalVolumes:
+  - name: qbittorrent-scripts
+    emptyDir: {}
+    ## When you want to enable automatic port configuration at startup, adjust this to:
+    # configMap:
+    #   name: <RELEASENAME>-scripts
+    #   defaultMode: 511
+
+additionalVolumeMounts:
+  - mountPath: "/config/custom-cont-init.d"
+    name: qbittorrent-scripts
+
+portal:
+  enabled: true
