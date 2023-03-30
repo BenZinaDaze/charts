@@ -11,7 +11,7 @@ groups:
     description: "Set CPU/memory limits for Kubernetes Pod"
 
 portals:
-  web_portal:
+  open:
     protocols:
       - "http"
     host:
