@@ -1,0 +1,4 @@
+image:
+  pullPolicy: IfNotPresent
+  repository: 19970688/nastools-bt
+  tag: latest@sha256:ddddf9438000e43545e7b85cbed0f73fdcf26ef49dc0ac47ee98a38398a265a9
