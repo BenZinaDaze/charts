@@ -1,0 +1,27 @@
+image:
+  repository: flaresolverr/flaresolverr
+  pullPolicy: IfNotPresent
+  tag: v3.1.1@sha256:e0959152f65021f74b7e05ba11b81fa2a647988010f7edfb28a7cbee10219a06
+
+securityContext:
+  readOnlyRootFilesystem: false
+  runAsNonRoot: false
+
+podSecurityContext:
+  runAsUser: 0
+  runAsGroup: 0
+
+service:
+  main:
+    ports:
+      main:
+        port: 8191
+        targetPort: 8191
+
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+
+portal:
+  enabled: true
