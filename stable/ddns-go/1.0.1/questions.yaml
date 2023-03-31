@@ -34,7 +34,7 @@ portals:
     host:
       - "$node_ip"
     ports:
-      - "$variable-service-main-ports-main-port"
+      - "$variable-service.main.ports.main.port"
     path: "/"
 
 questions:
