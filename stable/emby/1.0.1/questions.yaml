@@ -34,7 +34,7 @@ portals:
     host:
       - "$kubernetes-resource_configmap_portal_host"
     ports:
-      - "$variable-web_port"
+      - "$kubernetes-resource_configmap_portal_port"
 questions:
   - variable: global
     label: Global Settings
@@ -164,7 +164,7 @@ questions:
                         additional_attrs: true
                         type: dict
                         attrs:
-                          - variable: web_port
+                          - variable: port
                             label: "Port"
                             description: "This port exposes the container port on the service"
                             schema:
