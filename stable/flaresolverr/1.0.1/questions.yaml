@@ -27,6 +27,9 @@ groups:
     description: Advanced Configuration
   - name: Documentation
     description: Documentation
+
+portals: {}
+
 questions:
   - variable: global
     label: Global Settings

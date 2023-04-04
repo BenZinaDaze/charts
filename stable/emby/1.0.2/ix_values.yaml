@@ -1,0 +1,22 @@
+image:
+  repository: lovechen/embyserver
+  pullPolicy: IfNotPresent
+  tag: 4.8.0.21@sha256:df5d66888988539daa9161800299f4061288af3ce16188a3b4048c490b1eab6e
+
+securityContext:
+  readOnlyRootFilesystem: false
+
+service:
+  main:
+    ports:
+      main:
+        port: 8096
+        targetPort: 8096
+
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+
+portal:
+  enabled: true
