@@ -1,7 +1,7 @@
 image:
   repository: linuxserver/qbittorrent
   pullPolicy: IfNotPresent
-  tag: 4.5.2-libtorrentv1@sha256:ad9697a1b694e87eb44040a2c8fdbdc301a185b7a9b662077ff42e6ab3aa1c28
+  tag: latest@sha256:dd9b48eb08dfa6d61c9842c4b019aa6cd6b0b9a7e009680656c52659d7a69c12
 
 securityContext:
   readOnlyRootFilesystem: false
