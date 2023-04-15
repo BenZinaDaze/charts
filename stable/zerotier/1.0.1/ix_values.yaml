@@ -1,7 +1,7 @@
 image:
   repository: zerotier/zerotier
   pullPolicy: IfNotPresent
-  tag: 1.10.3@sha256:8ccc348e5415499dc56ef4c4f89b02c0998eff2a4725010cebdcec43a2099238
+  tag: 1.10.6@sha256:e18d6af4d7cbc995f7e416c91433cf910e0971187f3bb29827b10ac708e1d921
 
 securityContext:
   readOnlyRootFilesystem: false
