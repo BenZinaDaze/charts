@@ -3,8 +3,6 @@ groups:
     description: Image to be used for container
   - name: General Settings
     description: General Deployment Settings
-  - name: Workload Settings
-    description: Workload Settings
   - name: App Configuration
     description: App Specific Config Options
   - name: Networking and Services
@@ -21,12 +19,12 @@ groups:
     description: Traefik Middlewares
   - name: Metrics
     description: Metrics
+  - name: VPN
+    description: VPN
   - name: Addons
     description: Addon Configuration
   - name: Advanced
     description: Advanced Configuration
-  - name: Postgresql
-    description: Postgresql
   - name: Documentation
     description: Documentation
 portals:
@@ -37,439 +35,54 @@ portals:
       - "$node_ip"
     ports:
       - "$variable-service.main.ports.main.port"
-    path: "/transmission/web/#files"
+    path: "/"
 questions:
   - variable: global
-    group: General Settings
-    label: "Global Settings"
+    label: Global Settings
+    group: "General Settings"
     schema:
-      additional_attrs: true
       type: dict
+      hidden: true
       attrs:
-        - variable: stopAll
-          label: Stop All
-          description: "Stops All Running pods and hibernates cnpg"
+        - variable: isSCALE
+          label: Flag this is SCALE
           schema:
             type: boolean
-            default: false
-  - variable: workload
-    group: "Workload Settings"
+            default: true
+            hidden: true
+  - variable: controller
+    group: "General Settings"
     label: ""
     schema:
       additional_attrs: true
       type: dict
       attrs:
-        - variable: main
-          label: ""
+        - variable: replicas
+          description: Number of desired pod replicas
+          label: Desired Replicas
           schema:
-            additional_attrs: true
-            type: dict
-            attrs:
-              - variable: type
-                label: Type (Advanced)
+            type: int
+            required: true
+            default: 1
+  - variable: customextraargs
+    group: "General Settings"
+    label: "Extra Args"
+    description: "Do not click this unless you know what you are doing"
+    schema:
+      type: boolean
+      default: false
+      show_subquestions_if: true
+      subquestions:
+        - variable: extraArgs
+          label: Extra Args
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: arg
+                label: Arg
                 schema:
                   type: string
-                  default: Deployment
-                  enum:
-                    - value: Deployment
-                      description: Deployment
-                    - value: DaemonSet
-                      description: DaemonSet
-
-              - variable: replicas
-                label: Replicas (Advanced)
-                description: Set the number of Replicas
-                schema:
-                  type: int
-                  show_if: [["type", "!=", "DaemonSet"]]
-                  default: 1
-              - variable: podSpec
-                label: ""
-                schema:
-                  additional_attrs: true
-                  type: dict
-                  attrs:
-                    - variable: containers
-                      label: Containers
-                      schema:
-                        additional_attrs: true
-                        type: dict
-                        attrs:
-                          - variable: main
-                            label: Main Container
-                            schema:
-                              additional_attrs: true
-                              type: dict
-                              attrs:
-
-                                - variable: env
-                                  group: "App Configuration"
-                                  label: "Image Environment"
-                                  schema:
-                                    additional_attrs: true
-                                    type: dict
-                                    attrs:
-                                      - variable: TRANSMISSION_RPC_USERNAME
-                                        label: TRANSMISSION_RPC_USERNAME
-                                        schema:
-                                          type: string
-                                          default: "REPLACETHIS"
-                                      - variable: TRANSMISSION_RPC_PASSWORD
-                                        label: TRANSMISSION_RPC_PASSWORD
-                                        schema:
-                                          type: string
-                                          private: true
-                                          default: "REPLACETHIS"
-                                      - variable: TRANSMISSION_ALT_SPEED_DOWN
-                                        label: TRANSMISSION_ALT_SPEED_DOWN
-                                        schema:
-                                          type: int
-                                          default: 50
-                                      - variable: TRANSMISSION_ALT_SPEED_ENABLED
-                                        label: TRANSMISSION_ALT_SPEED_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_ALT_SPEED_TIME_BEGIN
-                                        label: TRANSMISSION_ALT_SPEED_TIME_BEGIN
-                                        schema:
-                                          type: int
-                                          default: 540
-                                      - variable: TRANSMISSION_ALT_SPEED_TIME_DAY
-                                        label: TRANSMISSION_ALT_SPEED_TIME_DAY
-                                        schema:
-                                          type: int
-                                          default: 127
-                                      - variable: TRANSMISSION_ALT_SPEED_TIME_ENABLED
-                                        label: TRANSMISSION_ALT_SPEED_TIME_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_ALT_SPEED_TIME_END
-                                        label: TRANSMISSION_ALT_SPEED_TIME_END
-                                        schema:
-                                          type: int
-                                          default: 1020
-                                      - variable: TRANSMISSION_ALT_SPEED_UP
-                                        label: TRANSMISSION_ALT_SPEED_UP
-                                        schema:
-                                          type: int
-                                          default: 50
-                                      - variable: TRANSMISSION_BIND_ADDRESS_IPV4
-                                        label: TRANSMISSION_BIND_ADDRESS_IPV4
-                                        schema:
-                                          type: string
-                                          default: "0.0.0.0"
-                                      - variable: TRANSMISSION_BIND_ADDRESS_IPV6
-                                        label: TRANSMISSION_BIND_ADDRESS_IPV6
-                                        schema:
-                                          type: string
-                                          default: "::"
-                                      - variable: TRANSMISSION_BLOCKLIST_ENABLED
-                                        label: TRANSMISSION_BLOCKLIST_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: true
-                                      - variable: TRANSMISSION_BLOCKLIST_URL
-                                        label: TRANSMISSION_BLOCKLIST_URL
-                                        schema:
-                                          type: string
-                                          default: "http://john.bitsurge.net/public/biglist.p2p.gz"
-                                      - variable: TRANSMISSION_CACHE_SIZE_MB
-                                        label: TRANSMISSION_CACHE_SIZE_MB
-                                        schema:
-                                          type: int
-                                          default: 4
-                                      - variable: TRANSMISSION_DHT_ENABLED
-                                        label: TRANSMISSION_DHT_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: true
-                                      - variable: TRANSMISSION_DOWNLOAD_DIR
-                                        label: TRANSMISSION_DOWNLOAD_DIR
-                                        schema:
-                                          type: string
-                                          default: "/downloads/complete"
-                                      - variable: TRANSMISSION_DOWNLOAD_QUEUE_ENABLED
-                                        label: TRANSMISSION_DOWNLOAD_QUEUE_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: true
-                                      - variable: TRANSMISSION_DOWNLOAD_QUEUE_SIZE
-                                        label: TRANSMISSION_DOWNLOAD_QUEUE_SIZE
-                                        schema:
-                                          type: int
-                                          default: 5
-                                      - variable: TRANSMISSION_ENCRYPTION
-                                        label: TRANSMISSION_ENCRYPTION
-                                        schema:
-                                          type: int
-                                          default: 1
-                                      - variable: TRANSMISSION_IDLE_SEEDING_LIMIT
-                                        label: TRANSMISSION_IDLE_SEEDING_LIMIT
-                                        schema:
-                                          type: int
-                                          default: 30
-                                      - variable: TRANSMISSION_IDLE_SEEDING_LIMIT_ENABLED
-                                        label: TRANSMISSION_IDLE_SEEDING_LIMIT_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_INCOMPLETE_DIR
-                                        label: TRANSMISSION_INCOMPLETE_DIR
-                                        schema:
-                                          type: string
-                                          default: "/downloads/incomplete"
-                                      - variable: TRANSMISSION_INCOMPLETE_DIR_ENABLED
-                                        label: TRANSMISSION_INCOMPLETE_DIR_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: true
-                                      - variable: TRANSMISSION_LPD_ENABLED
-                                        label: TRANSMISSION_LPD_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_MESSAGE_LEVEL
-                                        label: TRANSMISSION_MESSAGE_LEVEL
-                                        schema:
-                                          type: int
-                                          default: 2
-                                      - variable: TRANSMISSION_PEER_CONGESTION_ALGORITHM
-                                        label: TRANSMISSION_PEER_CONGESTION_ALGORITHM
-                                        schema:
-                                          type: string
-                                          default: ""
-                                      - variable: TRANSMISSION_PEER_ID_TTL_HOURS
-                                        label: TRANSMISSION_PEER_ID_TTL_HOURS
-                                        schema:
-                                          type: int
-                                          default: 6
-                                      - variable: TRANSMISSION_PEER_LIMIT_GLOBAL
-                                        label: TRANSMISSION_PEER_LIMIT_GLOBAL
-                                        schema:
-                                          type: int
-                                          default: 200
-                                      - variable: TRANSMISSION_PEER_LIMIT_PER_TORRENT
-                                        label: TRANSMISSION_PEER_LIMIT_PER_TORRENT
-                                        schema:
-                                          type: int
-                                          default: 50
-                                      - variable: TRANSMISSION_PEER_SOCKET_TOS
-                                        label: TRANSMISSION_PEER_SOCKET_TOS
-                                        schema:
-                                          type: string
-                                          default: "default"
-                                      - variable: TRANSMISSION_PEX_ENABLED
-                                        label: TRANSMISSION_PEX_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: true
-                                      - variable: TRANSMISSION_PORT_FORWARDING_ENABLED
-                                        label: TRANSMISSION_PORT_FORWARDING_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_PREALLOCATION
-                                        label: TRANSMISSION_PREALLOCATION
-                                        schema:
-                                          type: int
-                                          default: 1
-                                      - variable: TRANSMISSION_PREFETCH_ENABLED
-                                        label: TRANSMISSION_PREFETCH_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: true
-                                      - variable: TRANSMISSION_QUEUE_STALLED_ENABLED
-                                        label: TRANSMISSION_QUEUE_STALLED_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: true
-                                      - variable: TRANSMISSION_QUEUE_STALLED_MINUTES
-                                        label: TRANSMISSION_QUEUE_STALLED_MINUTES
-                                        schema:
-                                          type: int
-                                          default: 30
-                                      - variable: TRANSMISSION_RATIO_LIMIT
-                                        label: TRANSMISSION_RATIO_LIMIT
-                                        schema:
-                                          type: int
-                                          default: 2
-                                      - variable: TRANSMISSION_RATIO_LIMIT_ENABLED
-                                        label: TRANSMISSION_RATIO_LIMIT_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_RENAME_PARTIAL_FILES
-                                        label: TRANSMISSION_RENAME_PARTIAL_FILES
-                                        schema:
-                                          type: boolean
-                                          default: true
-                                      - variable: TRANSMISSION_RPC_AUTHENTICATION_REQUIRED
-                                        label: TRANSMISSION_RPC_AUTHENTICATION_REQUIRED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_RPC_BIND_ADDRESS
-                                        label: TRANSMISSION_RPC_BIND_ADDRESS
-                                        schema:
-                                          type: string
-                                          default: "0.0.0.0"
-                                      - variable: TRANSMISSION_RPC_ENABLED
-                                        label: TRANSMISSION_RPC_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: true
-                                      - variable: TRANSMISSION_RPC_HOST_WHITELIST
-                                        label: TRANSMISSION_RPC_HOST_WHITELIST
-                                        schema:
-                                          type: string
-                                          default: ""
-                                      - variable: TRANSMISSION_RPC_HOST_WHITELIST_ENABLED
-                                        label: TRANSMISSION_RPC_HOST_WHITELIST_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_RPC_WHITELIST
-                                        label: TRANSMISSION_RPC_WHITELIST
-                                        schema:
-                                          type: string
-                                          default: ""
-                                      - variable: TRANSMISSION_RPC_WHITELIST_ENABLED
-                                        label: TRANSMISSION_RPC_WHITELIST_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_SCRAPE_PAUSED_TORRENTS_ENABLED
-                                        label: TRANSMISSION_SCRAPE_PAUSED_TORRENTS_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: true
-                                      - variable: TRANSMISSION_SCRIPT_TORRENT_DONE_ENABLED
-                                        label: TRANSMISSION_SCRIPT_TORRENT_DONE_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_SCRIPT_TORRENT_DONE_FILENAME
-                                        label: TRANSMISSION_SCRIPT_TORRENT_DONE_FILENAME
-                                        schema:
-                                          type: string
-                                          default: ""
-                                      - variable: TRANSMISSION_SEED_QUEUE_ENABLED
-                                        label: TRANSMISSION_SEED_QUEUE_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_SEED_QUEUE_SIZE
-                                        label: TRANSMISSION_SEED_QUEUE_SIZE
-                                        schema:
-                                          type: int
-                                          default: 10
-                                      - variable: TRANSMISSION_SPEED_LIMIT_DOWN
-                                        label: TRANSMISSION_SPEED_LIMIT_DOWN
-                                        schema:
-                                          type: int
-                                          default: 100
-                                      - variable: TRANSMISSION_SPEED_LIMIT_DOWN_ENABLED
-                                        label: TRANSMISSION_SPEED_LIMIT_DOWN_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_SPEED_LIMIT_UP
-                                        label: TRANSMISSION_SPEED_LIMIT_UP
-                                        schema:
-                                          type: int
-                                          default: 100
-                                      - variable: TRANSMISSION_SPEED_LIMIT_UP_ENABLED
-                                        label: TRANSMISSION_SPEED_LIMIT_UP_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_START_ADDED_TORRENTS
-                                        label: TRANSMISSION_START_ADDED_TORRENTS
-                                        schema:
-                                          type: boolean
-                                          default: true
-                                      - variable: TRANSMISSION_TRASH_ORIGINAL_TORRENT_FILES
-                                        label: TRANSMISSION_TRASH_ORIGINAL_TORRENT_FILES
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                      - variable: TRANSMISSION_UMASK
-                                        label: TRANSMISSION_UMASK
-                                        schema:
-                                          type: int
-                                          default: 2
-                                      - variable: TRANSMISSION_UPLOAD_SLOTS_PER_TORRENT
-                                        label: TRANSMISSION_UPLOAD_SLOTS_PER_TORRENT
-                                        schema:
-                                          type: int
-                                          default: 14
-                                      - variable: TRANSMISSION_UTP_ENABLED
-                                        label: TRANSMISSION_UTP_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: true
-                                      - variable: TRANSMISSION_WATCH_DIR
-                                        label: TRANSMISSION_WATCH_DIR
-                                        schema:
-                                          type: string
-                                          default: "/watch"
-                                      - variable: TRANSMISSION_WATCH_DIR_ENABLED
-                                        label: TRANSMISSION_WATCH_DIR_ENABLED
-                                        schema:
-                                          type: boolean
-                                          default: false
-                                - variable: envList
-                                  label: Extra Environment Variables
-                                  description: "Please be aware that some variables are set in the background, adding duplicates here might cause issues or prevent the app from starting..."
-                                  schema:
-                                    type: list
-                                    default: []
-                                    items:
-                                      - variable: envItem
-                                        label: Environment Variable
-                                        schema:
-                                          additional_attrs: true
-                                          type: dict
-                                          attrs:
-                                            - variable: name
-                                              label: Name
-                                              schema:
-                                                type: string
-                                            - variable: value
-                                              label: Value
-                                              schema:
-                                                type: string
-                                - variable: extraArgs
-                                  label: Extra Args
-                                  schema:
-                                    type: list
-                                    default: []
-                                    items:
-                                      - variable: arg
-                                        label: Arg
-                                        schema:
-                                          type: string
-                                - variable: advanced
-                                  label: Show Advanced Settings
-                                  description: Advanced settings are not covered by TrueCharts Support
-                                  schema:
-                                    type: boolean
-                                    default: false
-                                    show_subquestions_if: true
-                                    subquestions:
-                                      - variable: command
-                                        label: Command
-                                        schema:
-                                          type: list
-                                          default: []
-                                          items:
-                                            - variable: param
-                                              label: Param
-                                              schema:
-                                                type: string
-
   - variable: TZ
     label: Timezone
     group: "General Settings"
@@ -478,74 +91,28 @@ questions:
       default: "Etc/UTC"
       $ref:
         - "definitions/timezone"
-  - variable: podOptions
+  - variable: envList
+    label: Extra Environment Variables
+    description: "Please be aware that some variables are set in the background, adding duplicates here might cause issues or prevent the app from starting..."
     group: "General Settings"
-    label: "Global Pod Options (Advanced)"
     schema:
-      additional_attrs: true
-      type: dict
-      attrs:
-        - variable: expertPodOpts
-          label: "Expert - Pod Options"
+      type: list
+      default: []
+      items:
+        - variable: envItem
+          label: Environment Variable
           schema:
-            type: boolean
-            default: false
-            show_subquestions_if: true
-            subquestions:
-              - variable: hostNetwork
-                label: "Host Networking"
+            additional_attrs: true
+            type: dict
+            attrs:
+              - variable: name
+                label: Name
                 schema:
-                  type: boolean
-                  default: false
-              - variable: dnsConfig
-                label: "DNS Configuration"
+                  type: string
+              - variable: value
+                label: Value
                 schema:
-                  type: dict
-                  additional_attrs: true
-                  attrs:
-                    - variable: options
-                      label: "Options"
-                      schema:
-                        type: list
-                        default: [{"name": "ndots", "value": "2"}]
-                        items:
-                          - variable: optionsEntry
-                            label: "Option Entry"
-                            schema:
-                              type: dict
-                              additional_attrs: true
-                              attrs:
-                                - variable: name
-                                  label: "Name"
-                                  schema:
-                                    type: string
-                                    required: true
-                                - variable: value
-                                  label: "Value"
-                                  schema:
-                                    type: string
-                    - variable: nameservers
-                      label: "Nameservers"
-                      schema:
-                        type: list
-                        default: []
-                        items:
-                          - variable: nsEntry
-                            label: "Nameserver Entry"
-                            schema:
-                              type: string
-                              required: true
-                    - variable: searches
-                      label: "Searches"
-                      schema:
-                        type: list
-                        default: []
-                        items:
-                          - variable: searchEntry
-                            label: "Search Entry"
-                            schema:
-                              type: string
-                              required: true
+                  type: string
   - variable: service
     group: Networking and Services
     label: Configure Service(s)
@@ -577,6 +144,8 @@ questions:
                       description: LoadBalancer (Expose Ports)
                     - value: ClusterIP
                       description: ClusterIP (Do Not Expose Ports)
+                    - value: Simple
+                      description: Deprecated CHANGE THIS
               - variable: loadBalancerIP
                 label: LoadBalancer IP
                 description: "MetalLB Only: Selects the Loadbalancer IP to expose on. Required when using PortalButton with MetalLB"
@@ -601,7 +170,7 @@ questions:
                             description: "This port exposes the container port on the service"
                             schema:
                               type: int
-                              default: 10109
+                              default: 39091
                               required: true
         - variable: torrent
           label: "Torrent Service"
@@ -627,6 +196,8 @@ questions:
                       description: LoadBalancer (Expose Ports)
                     - value: ClusterIP
                       description: ClusterIP (Do Not Expose Ports)
+                    - value: Simple
+                      description: Deprecated CHANGE THIS
               - variable: loadBalancerIP
                 label: LoadBalancer IP
                 description: "MetalLB Only: Selects the Loadbalancer IP to expose on. Required when using PortalButton with MetalLB"
@@ -651,7 +222,7 @@ questions:
                             description: "This port exposes the container port on the service"
                             schema:
                               type: int
-                              default: 51414
+                              default: 36881
                               required: true
   - variable: serviceexpert
     group: Networking and Services
@@ -661,7 +232,13 @@ questions:
       default: false
       show_subquestions_if: true
       subquestions:
-        - variable: scaleExternalInterface
+        - variable: hostNetwork
+          group: Networking and Services
+          label: Host-Networking (Complicated)
+          schema:
+            type: boolean
+            default: false
+        - variable: externalInterfaces
           description: Add External Interfaces
           label: Add external Interfaces
           group: Networking
@@ -702,41 +279,41 @@ questions:
                                   description: Use DHCP
                                 - value: static
                                   description: Use Static IP
-                          - variable: staticIPConfigurations
-                            label: Static IP Addresses
-                            schema:
-                              type: list
-                              show_if: [["type", "=", "static"]]
-                              items:
-                                - variable: staticIP
-                                  label: Static IP
+                              show_subquestions_if: static
+                              subquestions:
+                                - variable: staticIPConfigurations
+                                  label: Static IP Addresses
                                   schema:
-                                    type: ipaddr
-                                    cidr: true
-                          - variable: staticRoutes
-                            label: Static Routes
-                            schema:
-                              type: list
-                              show_if: [["type", "=", "static"]]
-                              items:
-                                - variable: staticRouteConfiguration
-                                  label: Static Route Configuration
-                                  schema:
-                                    additional_attrs: true
-                                    type: dict
-                                    attrs:
-                                      - variable: destination
-                                        label: Destination
+                                    type: list
+                                    items:
+                                      - variable: staticIP
+                                        label: Static IP
                                         schema:
                                           type: ipaddr
                                           cidr: true
-                                          required: true
-                                      - variable: gateway
-                                        label: Gateway
+                                - variable: staticRoutes
+                                  label: Static Routes
+                                  schema:
+                                    type: list
+                                    items:
+                                      - variable: staticRouteConfiguration
+                                        label: Static Route Configuration
                                         schema:
-                                          type: ipaddr
-                                          cidr: false
-                                          required: true
+                                          additional_attrs: true
+                                          type: dict
+                                          attrs:
+                                            - variable: destination
+                                              label: Destination
+                                              schema:
+                                                type: ipaddr
+                                                cidr: true
+                                                required: true
+                                            - variable: gateway
+                                              label: Gateway
+                                              schema:
+                                                type: ipaddr
+                                                cidr: false
+                                                required: true
         - variable: serviceList
           label: Add Manual Custom Services
           group: Networking and Services
@@ -850,15 +427,15 @@ questions:
                                   label: Port Type
                                   schema:
                                     type: string
-                                    default: tcp
+                                    default: TCP
                                     enum:
-                                      - value: http
+                                      - value: HTTP
                                         description: HTTP
-                                      - value: https
+                                      - value: HTTPS
                                         description: HTTPS
-                                      - value: tcp
+                                      - value: TCP
                                         description: TCP
-                                      - value: udp
+                                      - value: UDP
                                         description: UDP
                                 - variable: targetPort
                                   label: Target Port
@@ -1100,8 +677,8 @@ questions:
                                                 type: string
                                                 required: true
                                                 default: Prefix
-                    - variable: certificateIssuer
-                      label: Cert-Manager clusterIssuer
+                    - variable: clusterIssuer
+                      label: clusterIssuer
                       description: 'add the name of your cert-manager clusterIssuer here for automatic tls certificates. Cannot be used combined with tls option below'
                       schema:
                         type: string
@@ -1110,7 +687,7 @@ questions:
                       label: TLS-Settings
                       schema:
                         type: list
-                        show_if: [["certificateIssuer", "=", ""]]
+                        show_if: [["clusterIssuer", "=", ""]]
                         default: []
                         items:
                           - variable: tlsEntry
@@ -1132,7 +709,7 @@ questions:
                                           default: ""
                                           required: true
 
-                                - variable: certificateIssuer
+                                - variable: clusterIssuer
                                   label: Use Cert-Manager clusterIssuer
                                   description: 'add the name of your cert-manager clusterIssuer here for automatic tls certificates.'
                                   schema:
@@ -1141,14 +718,14 @@ questions:
                                 - variable: scaleCert
                                   label: Use TrueNAS SCALE Certificate (Deprecated)
                                   schema:
-                                    show_if: [["certificateIssuer", "=", ""]]
+                                    show_if: [["clusterIssuer", "=", ""]]
                                     type: int
                                     $ref:
                                       - "definitions/certificate"
                                 - variable: secretName
                                   label: Use Custom Secret (Advanced)
                                   schema:
-                                    show_if: [["certificateIssuer", "=", ""]]
+                                    show_if: [["clusterIssuer", "=", ""]]
                                     type: string
                                     default: ""
                     - variable: entrypoint
@@ -1332,99 +909,112 @@ questions:
                         type: string
                         default: ""
                         required: true
-  - variable: securityContext
+  - variable: security
+    label: Container Security Settings
     group: Security and Permissions
-    label: Security Context
     schema:
-      additional_attrs: true
       type: dict
+      additional_attrs: true
       attrs:
-        - variable: container
-          label: Container
+        - variable: editsecurity
+          label: Change PUID / UMASK values
+          description: By enabling this you override default set values.
           schema:
-            additional_attrs: true
-            type: dict
-            attrs:
-              # Settings from questions.yaml get appended here on a per-app basis
-
-              - variable: runAsUser
-                label: "runAsUser"
-                description: "The UserID of the user running the application"
-                schema:
-                  type: int
-                  default: 568
-              - variable: runAsGroup
-                label: "runAsGroup"
-                description: "The groupID this App of the user running the application"
-                schema:
-                  type: int
-                  default: 568
-              # Settings from questions.yaml get appended here on a per-app basis
+            type: boolean
+            default: false
+            show_subquestions_if: true
+            subquestions:
               - variable: PUID
                 label: Process User ID - PUID
                 description: When supported by the container, this sets the User ID running the Application Process. Not supported by all Apps
                 schema:
                   type: int
-                  show_if: [["runAsUser", "=", 0]]
                   default: 568
               - variable: UMASK
                 label: UMASK
                 description: When supported by the container, this sets the UMASK for the App. Not supported by all Apps
                 schema:
                   type: string
-                  default: "0022"
-              - variable: advanced
-                label: Show Advanced Settings
-                description: Advanced settings are not covered by TrueCharts Support
-                schema:
-                  type: boolean
-                  default: false
-                  show_subquestions_if: true
-                  subquestions:
-                    - variable: privileged
-                      label: "Privileged mode"
-                      schema:
-                        type: boolean
-                        default: false
-                    - variable: readOnlyRootFilesystem
-                      label: "ReadOnly Root Filesystem"
-                      schema:
-                        type: boolean
-                        default: true
-        - variable: pod
-          label: Pod
+                  default: "002"
+  - variable: advancedSecurity
+    label: Show Advanced Security Settings
+    group: Security and Permissions
+    schema:
+      type: boolean
+      default: false
+      show_subquestions_if: true
+      subquestions:
+        - variable: securityContext
+          label: Security Context
           schema:
             additional_attrs: true
             type: dict
             attrs:
-              - variable: fsGroupChangePolicy
-                label: "When should we take ownership?"
+              - variable: privileged
+                label: "Privileged mode"
                 schema:
-                  type: string
-                  default: OnRootMismatch
-                  enum:
-                    - value: OnRootMismatch
-                      description: OnRootMismatch
-                    - value: Always
-                      description: Always
-              - variable: supplementalGroups
-                label: Supplemental Groups
+                  type: boolean
+                  default: false
+              - variable: readOnlyRootFilesystem
+                label: "ReadOnly Root Filesystem"
                 schema:
-                  type: list
-                  default: []
-                  items:
-                    - variable: supplementalGroupsEntry
-                      label: Supplemental Group
-                      schema:
-                        type: int
-              # Settings from questions.yaml get appended here on a per-app basis
-              - variable: fsGroup
-                label: "fsGroup"
-                description: "The group that should own ALL storage."
+                  type: boolean
+                  default: false
+              - variable: allowPrivilegeEscalation
+                label: "Allow Privilege Escalation"
+                schema:
+                  type: boolean
+                  default: false
+              - variable: runAsNonRoot
+                label: "runAsNonRoot"
+                schema:
+                  type: boolean
+                  default: true
+  - variable: podSecurityContext
+    group: Security and Permissions
+    label: Pod Security Context
+    schema:
+      additional_attrs: true
+      type: dict
+      attrs:
+        - variable: runAsUser
+          label: "runAsUser"
+          description: "The UserID of the user running the application"
+          schema:
+            type: int
+            default: 568
+        - variable: runAsGroup
+          label: "runAsGroup"
+          description: "The groupID this App of the user running the application"
+          schema:
+            type: int
+            default: 568
+        - variable: fsGroup
+          label: "fsGroup"
+          description: "The group that should own ALL storage."
+          schema:
+            type: int
+            default: 568
+        - variable: fsGroupChangePolicy
+          label: "When should we take ownership?"
+          schema:
+            type: string
+            default: OnRootMismatch
+            enum:
+              - value: OnRootMismatch
+                description: OnRootMismatch
+              - value: Always
+                description: Always
+        - variable: supplementalGroups
+          label: Supplemental Groups
+          schema:
+            type: list
+            default: []
+            items:
+              - variable: supplementalGroupsEntry
+                label: Supplemental Group
                 schema:
                   type: int
-                  default: 568
-
   - variable: resources
     group: Resources and Devices
     label: "Resource Limits"
@@ -1498,7 +1088,7 @@ questions:
                 description: Sets the persistence type
                 schema:
                   type: string
-                  default: device
+                  default: hostPath
                   hidden: true
               - variable: readOnly
                 label: readOnly
@@ -1516,33 +1106,15 @@ questions:
                 schema:
                   type: string
                   default: "/dev/ttyACM0"
+  # Specify GPU configuration
   - variable: scaleGPU
     label: GPU Configuration
     group: Resources and Devices
     schema:
-      type: list
-      default: []
-      items:
-        - variable: scaleGPUEntry
-          label: GPU
-          schema:
-            additional_attrs: true
-            type: dict
-            attrs:
-              # Specify GPU configuration
-              - variable: gpu
-                label: Select GPU
-                schema:
-                  type: dict
-                  $ref:
-                    - "definitions/gpuConfiguration"
-                  attrs: []
-              - variable: workaround
-                label: "Workaround"
-                schema:
-                  type: string
-                  default: workaround
-                  hidden: true
+      type: dict
+      $ref:
+        - "definitions/gpuConfiguration"
+      attrs: []
 #  - variable: horizontalPodAutoscaler
 #    group: Advanced
 #    label: (Advanced) Horizontal Pod Autoscaler
@@ -1993,6 +1565,22 @@ questions:
                   default: false
                   show_subquestions_if: true
                   subquestions:
+                    - variable: git
+                      label: Git Settings
+                      schema:
+                        additional_attrs: true
+                        type: dict
+                        attrs:
+                          - variable: deployKey
+                            description: Raw SSH Private Key
+                            label: Deploy Key
+                            schema:
+                              type: string
+                          - variable: deployKeyBase64
+                            description: Base64-encoded SSH private key. When both variables are set, the raw SSH key takes precedence
+                            label: Deploy Key Base64
+                            schema:
+                              type: string
                     - variable: service
                       label: ""
                       schema:
@@ -2019,6 +1607,48 @@ questions:
                               show_if: [["type", "=", "LoadBalancer"]]
                               type: string
                               default: ""
+                          - variable: advancedsvcset
+                            label: Show Advanced Service Settings
+                            schema:
+                              type: boolean
+                              default: false
+                              show_subquestions_if: true
+                              subquestions:
+                                - variable: externalIPs
+                                  label: "External IP's"
+                                  description: "External IP's"
+                                  schema:
+                                    type: list
+                                    default: []
+                                    items:
+                                      - variable: externalIP
+                                        label: External IP
+                                        schema:
+                                          type: string
+                                - variable: ipFamilyPolicy
+                                  label: IP Family Policy
+                                  description: Specify the IP Policy
+                                  schema:
+                                    type: string
+                                    default: SingleStack
+                                    enum:
+                                      - value: SingleStack
+                                        description: SingleStack
+                                      - value: PreferDualStack
+                                        description: PreferDualStack
+                                      - value: RequireDualStack
+                                        description: RequireDualStack
+                                - variable: ipFamilies
+                                  label: IP Families
+                                  description: (Advanced) The IP Families that should be used
+                                  schema:
+                                    type: list
+                                    default: []
+                                    items:
+                                      - variable: ipFamily
+                                        label: IP Family
+                                        schema:
+                                          type: string
                           - variable: ports
                             label: ""
                             schema:
@@ -2036,44 +1666,14 @@ questions:
                                         schema:
                                           type: int
                                           default: 36107
+                                      - variable: nodePort
+                                        description: Leave Empty to Disable
+                                        label: nodePort DEPRECATED
+                                        schema:
+                                          type: int
+                                          default: 36107
                     - variable: envList
                       label: Codeserver Environment Variables
-                      schema:
-                        type: list
-                        show_if: [["type", "!=", "disabled"]]
-                        default: []
-                        items:
-                          - variable: envItem
-                            label: Environment Variable
-                            schema:
-                              additional_attrs: true
-                              type: dict
-                              attrs:
-                                - variable: name
-                                  label: Name
-                                  schema:
-                                    type: string
-                                    required: true
-                                - variable: value
-                                  label: Value
-                                  schema:
-                                    type: string
-                                    required: true
-        - variable: netshoot
-          label: Netshoot
-          schema:
-            additional_attrs: true
-            type: dict
-            attrs:
-              - variable: enabled
-                label: Enabled
-                schema:
-                  type: boolean
-                  default: false
-                  show_subquestions_if: true
-                  subquestions:
-                    - variable: envList
-                      label: Netshoot Environment Variables
                       schema:
                         type: list
                         show_if: [["type", "!=", "disabled"]]
@@ -2109,14 +1709,12 @@ questions:
                   enum:
                     - value: disabled
                       description: disabled
-                    - value: gluetun
-                      description: Gluetun
+                    - value: openvpn
+                      description: OpenVPN
+                    - value: wireguard
+                      description: Wireguard
                     - value: tailscale
                       description: Tailscale
-                    - value: openvpn
-                      description: OpenVPN (Deprecated)
-                    - value: wireguard
-                      description: Wireguard (Deprecated)
               - variable: openvpn
                 label: OpenVPN Settings
                 schema:
@@ -2134,7 +1732,6 @@ questions:
                       description: Authentication Credentials
                       schema:
                         type: string
-                        show_if: [["username", "!=", ""]]
                         default: ""
                         required: true
               - variable: tailscale
@@ -2239,10 +1836,39 @@ questions:
               - variable: configFile
                 label: VPN Config File Location
                 schema:
-                  type: string
+                  type: dict
                   show_if: [["type", "!=", "disabled"]]
-                  default: ""
-
+                  attrs:
+                    - variable: enabled
+                      label: Enabled
+                      schema:
+                        type: boolean
+                        default: true
+                        hidden: true
+                    - variable: type
+                      label: Type
+                      schema:
+                        type: string
+                        default: hostPath
+                        hidden: true
+                    - variable: hostPathType
+                      label: hostPathType
+                      schema:
+                        type: string
+                        default: File
+                        hidden: true
+                    - variable: noMount
+                      label: noMount
+                      schema:
+                        type: boolean
+                        default: true
+                        hidden: true
+                    - variable: hostPath
+                      label: Full Path to File
+                      description: "Path to your local VPN config file for example: /mnt/tank/vpn.conf or /mnt/tank/vpn.ovpn"
+                      schema:
+                        type: string
+                        default: ""
               - variable: envList
                 label: VPN Environment Variables
                 schema:

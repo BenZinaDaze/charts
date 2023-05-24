@@ -1,6 +1,6 @@
-fast, easy, and free BitTorrent client.
+qBittorrent is a cross-platform free and open-source BitTorrent client
 
-This App is supplied by TrueCharts, for more information visit the manual: [https://truecharts.org/charts/stable/transmission](https://truecharts.org/charts/stable/transmission)
+This App is supplied by TrueCharts, for more information visit the manual: [https://truecharts.org/charts/stable/qbittorrent](https://truecharts.org/charts/stable/qbittorrent)
 
 ---
 
