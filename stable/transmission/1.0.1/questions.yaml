@@ -222,7 +222,7 @@ questions:
                             description: "This port exposes the container port on the service"
                             schema:
                               type: int
-                              default: 36881
+                              default: 51413
                               required: true
   - variable: serviceexpert
     group: Networking and Services
