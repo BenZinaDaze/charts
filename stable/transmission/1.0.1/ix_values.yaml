@@ -10,8 +10,8 @@ service:
   main:
     ports:
       main:
-        port: 9091
-        targetPort: 9091
+        port: 39091
+        targetPort: 39091
   torrent:
     enabled: true
     ports:
