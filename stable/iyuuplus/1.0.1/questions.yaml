@@ -32,11 +32,12 @@ groups:
 portals:
   open:
     protocols:
-      - "$kubernetes-resource_configmap_tcportal-open_protocol"
+      - "http"
     host:
-      - "$kubernetes-resource_configmap_tcportal-open_host"
+      - "$node_ip"
     ports:
-      - "$kubernetes-resource_configmap_tcportal-open_port"
+      - "$variable-service.main.ports.main.port"
+    path: "/"
 questions:
   - variable: global
     group: General Settings
