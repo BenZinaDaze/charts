@@ -1,0 +1,27 @@
+image:
+  repository: xhofe/alist
+  pullPolicy: IfNotPresent
+  tag: v3.17.0@sha256:54fad15ef46fbdf3d98743c50e43949359c73f82cdd7f4cfd54c7338ab17aacb
+
+securityContext:
+  readOnlyRootFilesystem: false
+  runAsNonRoot: false
+
+podSecurityContext:
+  runAsUser: 0
+  runAsGroup: 0
+
+service:
+  main:
+    ports:
+      main:
+        targetPort: 5244
+        port: 35244
+
+persistence:
+  data:
+    enabled: true
+    mountPath: "/opt/alist/data"
+
+portal:
+  enabled: true
