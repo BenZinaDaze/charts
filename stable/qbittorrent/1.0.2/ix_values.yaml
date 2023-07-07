@@ -1,0 +1,33 @@
+image:
+  repository: linuxserver/qbittorrent
+  pullPolicy: IfNotPresent
+  tag: version-14.3.5.99202106211645-7376-e25948e73ubuntu20.04.1@sha256:a8e0d8dce64c377dc2b501ddce29f5a9a6f6a35fe5fe8ee81708e494321d8159
+
+securityContext:
+  readOnlyRootFilesystem: false
+
+service:
+  main:
+    ports:
+      main:
+        port: 38080
+        targetPort: 38080
+  torrent:
+    enabled: true
+    ports:
+      torrent:
+        enabled: true
+        port: 36881
+        protocol: TCP
+      torrentudp:
+        enabled: true
+        port: 36881
+        protocol: UDP
+
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+
+portal:
+  enabled: true
