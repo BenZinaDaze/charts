@@ -1,0 +1,33 @@
+image:
+  repository: linuxserver/qbittorrent
+  pullPolicy: IfNotPresent
+  tag: 14.2.4.99202004222217-7004-50f676cubuntu18.04.1-ls75@sha256:9ef261b4e07ec3f6468cd777131d62260e942377814a78abd08f004698654cc3
+
+securityContext:
+  readOnlyRootFilesystem: false
+
+service:
+  main:
+    ports:
+      main:
+        port: 38080
+        targetPort: 38080
+  torrent:
+    enabled: true
+    ports:
+      torrent:
+        enabled: true
+        port: 36881
+        protocol: TCP
+      torrentudp:
+        enabled: true
+        port: 36881
+        protocol: UDP
+
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+
+portal:
+  enabled: true
