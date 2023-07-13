@@ -1,0 +1,13 @@
+apiVersion: v2
+appVersion: 3.2.3
+dependencies:
+- name: common
+  repository: file://../../../library/common/2207.0.0
+  version: 2207.0.0
+description: NAS媒体库资源归集、整理自动化工具
+home: https://github.com/NAStool/nas-tools 
+icon: https://user-images.githubusercontent.com/51039935/197520391-f35db354-6071-4c12-86ea-fc450f04bc85.png
+keywords:
+- media
+name: nas-tools
+version: 1.0.3
