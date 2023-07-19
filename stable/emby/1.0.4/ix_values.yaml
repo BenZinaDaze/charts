@@ -1,7 +1,7 @@
 image:
-  repository: lovechen/embyserver
+  repository: amilys/embyserver
   pullPolicy: IfNotPresent
-  tag: 4.8.0.21@sha256:df5d66888988539daa9161800299f4061288af3ce16188a3b4048c490b1eab6e
+  tag: latest@sha256:56f97c0a0ec93f39f06613a4bf5de01c33a370988277e2727ed2d91c5ba33a61
 
 securityContext:
   readOnlyRootFilesystem: false
