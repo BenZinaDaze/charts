@@ -1,0 +1,45 @@
+image:
+  repository: linuxserver/qbittorrent
+  pullPolicy: IfNotPresent
+  tag: 14.3.9@sha256:31b1a6cdc653c8a227c6c663e7abd7702cd46809d14e162c71901f21fe7d7544
+
+securityContext:
+  readOnlyRootFilesystem: false
+
+service:
+  main:
+    ports:
+      main:
+        port: 38080
+        targetPort: 38080
+  torrent:
+    enabled: true
+    ports:
+      torrent:
+        enabled: true
+        port: 36881
+        protocol: TCP
+      torrentudp:
+        enabled: true
+        port: 36881
+        protocol: UDP
+
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+
+additionalVolumes:
+  - name: qbittorrent-scripts
+    emptyDir: {}
+    ## When you want to enable automatic port configuration at startup, adjust this to:
+    # configMap:
+    #   name: <RELEASENAME>-scripts
+    #   defaultMode: 511
+
+additionalVolumeMounts:
+  - mountPath: "/config/custom-cont-init.d"
+    name: qbittorrent-scripts
+
+portal:
+  enabled: true
