@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 3.2.3
+appVersion: 3.2.10
 dependencies:
 - name: common
   repository: file://../../../library/common/2207.0.0
@@ -10,4 +10,4 @@ icon: https://user-images.githubusercontent.com/51039935/197520391-f35db354-6071
 keywords:
 - media
 name: nas-tools
-version: 1.0.2
+version: 1.0.4
