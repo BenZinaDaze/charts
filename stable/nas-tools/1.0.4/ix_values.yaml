@@ -1,4 +1,4 @@
 image:
   pullPolicy: IfNotPresent
-  repository: nhsuyelin/nas-tools
+  repository: hsuyelin/nas-tools
   tag: latest
