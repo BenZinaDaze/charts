@@ -30,11 +30,12 @@ groups:
 portals:
   open:
     protocols:
-      - "$kubernetes-resource_configmap_portal_protocol"
+      - "http"
     host:
-      - "$kubernetes-resource_configmap_portal_host"
+      - "$node_ip"
     ports:
-      - "$kubernetes-resource_configmap_portal_port"
+      - "$variable-service.main.ports.main.port"
+    path: "/"
 questions:
   - variable: global
     label: Global Settings

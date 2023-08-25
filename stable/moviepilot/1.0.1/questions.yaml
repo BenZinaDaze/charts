@@ -11,7 +11,7 @@ groups:
     description: "Set CPU/memory limits for Kubernetes Pod"
 
 portals:
-  web_portal:
+  open:
     protocols:
       - "http"
     host:
@@ -55,7 +55,7 @@ questions:
                 schema:
                   type: string
                   required: true
-  
+
   - variable: dnsConfig
     label: "DNS Configuration"
     group: "Advanced DNS Settings"
@@ -101,13 +101,12 @@ questions:
       min: 1
       max: 65535
 
-
   - variable: environmentVariables
     label: "Moviepilot environment"
     group: "Configuration"
     schema:
       type: list
-      default: [ ]
+      default: []
       items:
         - variable: environmentVariable
           label: "Environment Variable"
