@@ -1,7 +1,7 @@
 image:
   repository: xhofe/alist
   pullPolicy: IfNotPresent
-  tag: v3.17.0@sha256:54fad15ef46fbdf3d98743c50e43949359c73f82cdd7f4cfd54c7338ab17aacb
+  tag: latest
 
 securityContext:
   readOnlyRootFilesystem: false
