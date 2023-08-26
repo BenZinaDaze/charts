@@ -57,7 +57,7 @@ questions:
                   $ref:
                     - "normalize/ixVolume"
                   show_if: [["hostPathEnabled", "=", false]]
-                  default: "ix-nastools_config"
+                  default: "mediaservertools_config"
                   editable: false
               - variable: mountPath
                 label: "Configuration Mount Path"
