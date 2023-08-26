@@ -1,12 +1,8 @@
 groups:
   - name: "Configuration"
-    description: "Moviepilot application configuration"
+    description: "MediaTools application configuration"
   - name: "Storage"
-    description: "Configure storage for Moviepilot"
-  - name: "Networking"
-    description: "Networking Configuration for Moviepilot"
-  - name: "Advanced DNS Settings"
-    description: "Configure DNS settings"
+    description: "Configure storage for MediaTools"
   - name: "Resource Limits"
     description: "Set CPU/memory limits for Kubernetes Pod"
 
