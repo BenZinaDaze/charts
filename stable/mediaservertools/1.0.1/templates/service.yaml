@@ -3,7 +3,7 @@
 {{ $selectors = mustAppend $selectors (dict "key" "release" "value" .Release.Name ) }}
 # {{ $ports := list }}
 # {{ $ports = mustAppend $ports (dict "name" "web" "port" .Values.web_port "nodePort" .Values.web_port "targetPort" 3000) }}
-{{ $params := . }}
+# {{ $params := . }}
 # {{ $_ := set $params "commonService" (dict "type" "NodePort" "ports" $ports ) }}
 {{ $_1 := set .Values "extraSelectorLabels" $selectors }}
 {{ include "common.classes.service" $params }}
