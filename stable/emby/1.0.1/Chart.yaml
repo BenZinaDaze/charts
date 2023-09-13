@@ -1,5 +1,4 @@
 apiVersion: v2
-appVersion: "4.7.11.0"
 dependencies:
   - name: common
     repository: https://library-charts.truecharts.org
@@ -23,7 +22,7 @@ sources:
   - https://ghcr.io/onedr0p/emby
   - https://github.com/linuxserver/docker-emby.git
 type: application
-version: 1.0.3
+version: 1.0.1
 annotations:
   truecharts.org/catagories: |
     - media
