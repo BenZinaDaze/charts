@@ -1,0 +1,33 @@
+image:
+  repository: linuxserver/transmission
+  pullPolicy: IfNotPresent
+  tag: 4.0.3@sha256:6c4698004c1ba8c142afd35ce7d705c4672701c3f4a361bda7d387b81c281005
+
+securityContext:
+  readOnlyRootFilesystem: false
+
+service:
+  main:
+    ports:
+      main:
+        port: 49091
+        targetPort: 49091
+  torrent:
+    enabled: true
+    ports:
+      torrent:
+        enabled: true
+        port: 41413
+        protocol: TCP
+      torrentudp:
+        enabled: true
+        port: 41413
+        protocol: UDP
+
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+
+portal:
+  enabled: true
