@@ -100,6 +100,39 @@
                 "https://github.com/jxxghp/MoviePilot"
             ],
             "icon_url": "https://raw.githubusercontent.com/jxxghp/MoviePilot-Frontend/main/public/logo.png"
+        },
+        "nas-tools": {
+            "app_readme": "NAS媒体库自动化管理工具。",
+            "categories": [
+                "media"
+            ],
+            "description": "NAS媒体库自动化管理工具。",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/hsuyelin/nas-tools",
+            "location": "/home/runner/work/catalog/catalog/stable/alist",
+            "latest_version": "1.0.4",
+            "latest_app_version": "latest",
+            "latest_human_version": "latest",
+            "last_update": "2023-01-01 00:00:00",
+            "name": "nas-tools",
+            "recommended": false,
+            "title": "Nas-tools",
+            "maintainers": [
+                {
+                    "email": "hsuyelin",
+                    "name": "jxxghp",
+                    "url": "https://github.com/hsuyelin/nas-tools"
+                }
+            ],
+            "tags": [
+                "media"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://github.com/hsuyelin/nas-tools"
+            ],
+            "icon_url": "https://user-images.githubusercontent.com/51039935/197520391-f35db354-6071-4c12-86ea-fc450f04bc85.png"
         }
     }
 }
