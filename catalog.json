@@ -19,9 +19,9 @@
             "title": "Alist",
             "maintainers": [
                 {
-                    "email": "benz1",
-                    "name": "benz1",
-                    "url": "benz1"
+                    "email": "xhofe",
+                    "name": "xhofe",
+                    "url": "https://alist.nn.ci/zh/"
                 }
             ],
             "tags": [
@@ -54,9 +54,9 @@
             "title": "Emby",
             "maintainers": [
                 {
-                    "email": "benz1",
-                    "name": "benz1",
-                    "url": "benz1"
+                    "email": "emby",
+                    "name": "emby",
+                    "url": "https://emby.media"
                 }
             ],
             "tags": [
@@ -67,6 +67,39 @@
                 "https://emby.media"
             ],
             "icon_url": "https://truecharts.org/img/hotlink-ok/chart-icons/emby.png"
+        },
+        "moviepilot": {
+            "app_readme": "NAS媒体库自动化管理工具。",
+            "categories": [
+                "media"
+            ],
+            "description": "NAS媒体库自动化管理工具。",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/jxxghp/MoviePilot",
+            "location": "/home/runner/work/catalog/catalog/stable/alist",
+            "latest_version": "1.0.2",
+            "latest_app_version": "latest",
+            "latest_human_version": "latest",
+            "last_update": "2023-01-01 00:00:00",
+            "name": "moviepilot",
+            "recommended": false,
+            "title": "Moviepilot",
+            "maintainers": [
+                {
+                    "email": "jxxghp",
+                    "name": "jxxghp",
+                    "url": "https://github.com/jxxghp/MoviePilot"
+                }
+            ],
+            "tags": [
+                "media"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://github.com/jxxghp/MoviePilot"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/jxxghp/MoviePilot-Frontend/main/public/logo.png"
         }
     }
 }
