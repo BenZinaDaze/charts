@@ -19,7 +19,9 @@
             "title": "Alist",
             "maintainers": [
                 {
-                    "name": "benz1"
+                    "email": "benz1",
+                    "name": "benz1",
+                    "url": "benz1"
                 }
             ],
             "tags": [
