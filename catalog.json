@@ -9,6 +9,7 @@
             "healthy": true,
             "healthy_error": null,
             "home": "https://alist.nn.ci/zh/",
+            "location": "/home/runner/work/catalog/catalog/stable/alist",
             "latest_version": "1.0.4",
             "name": "alist",
             "recommended": false,
