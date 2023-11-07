@@ -1,0 +1,33 @@
+{
+    "stable": {
+        "alist": {
+            "app_readme": "Alist",
+            "categories": [
+                "cloud"
+            ],
+            "description": "Alist.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://alist.nn.ci/zh/",
+            "latest_version": "1.0.4",
+            "name": "alist",
+            "recommended": false,
+            "title": "Alist",
+            "maintainers": [
+                {
+                    "name": "benz1"
+                }
+            ],
+            "tags": [
+                "cloud",
+                "storage"
+            ],
+            "sources": [
+                "https://github.com/alist-org/docs",
+                "https://hub.docker.com/r/xhofe/alist",
+                "https://alist.nn.ci/zh/"
+            ],
+            "icon_url": "https://truecharts.org/img/hotlink-ok/chart-icons/alist.png"
+        }
+    }
+}
