@@ -166,6 +166,39 @@
                 "https://github.com/easychen/CookieCloud"
             ],
             "icon_url": "https://raw.githubusercontent.com/easychen/CookieCloud/master/extension/assets/icon.png"
+        },
+        "IYUUPlus": {
+            "app_readme": "IYUU自动辅种工具，目前能对国内大部分的PT站点自动辅种，支持下载器集群，支持多盘位，支持多下载目录，支持连接远程下载器等。",
+            "categories": [
+                "tools"
+            ],
+            "description": "IYUU自动辅种工具，目前能对国内大部分的PT站点自动辅种，支持下载器集群，支持多盘位，支持多下载目录，支持连接远程下载器等。",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/ledccn/IYUUPlus",
+            "location": "/home/runner/work/catalog/catalog/stable/alist",
+            "latest_version": "1.0.1",
+            "latest_app_version": "latest",
+            "latest_human_version": "latest",
+            "last_update": "2023-01-01 00:00:00",
+            "name": "IYUUPlus",
+            "recommended": false,
+            "title": "IYUUPlus",
+            "maintainers": [
+                {
+                    "email": "ledccn",
+                    "name": "ledccn",
+                    "url": "https://github.com/ledccn/IYUUPlus"
+                }
+            ],
+            "tags": [
+                "tools"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://github.com/ledccn/IYUUPlus"
+            ],
+            "icon_url": "https://truecharts.org/img/hotlink-ok/chart-icons/iyuuplus.png"
         }
     }
 }

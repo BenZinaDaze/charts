@@ -1,7 +1,7 @@
 image:
   repository: iyuucn/iyuuplus
   pullPolicy: IfNotPresent
-  tag: latest@sha256:657efe26a464638a2e39ba618e8912830c6280fa1fe9af55adb942175cf0835e
+  tag: latest
 service:
   main:
     ports:
