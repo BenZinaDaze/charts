@@ -1,11 +1,11 @@
 {
     "stable": {
         "alist": {
-            "app_readme": "Alist",
+            "app_readme": "一个支持多种存储的文件列表程序，使用 Gin 和 Solidjs。",
             "categories": [
                 "cloud"
             ],
-            "description": "Alist.",
+            "description": "一个支持多种存储的文件列表程序，使用 Gin 和 Solidjs。",
             "healthy": true,
             "healthy_error": null,
             "home": "https://alist.nn.ci/zh/",
@@ -13,7 +13,7 @@
             "latest_version": "1.0.4",
             "latest_app_version": "latest",
             "latest_human_version": "latest",
-            "last_update": "2023-11-07 06:41:10",
+            "last_update": "2023-01-01 00:00:00",
             "name": "alist",
             "recommended": false,
             "title": "Alist",
@@ -25,8 +25,7 @@
                 }
             ],
             "tags": [
-                "cloud",
-                "storage"
+                "cloud"
             ],
             "screenshots": [],
             "sources": [
@@ -35,6 +34,39 @@
                 "https://alist.nn.ci/zh/"
             ],
             "icon_url": "https://truecharts.org/img/hotlink-ok/chart-icons/alist.png"
+        },
+        "emby": {
+            "app_readme": "Emby是一款优秀的媒体服务器软件，致力于为用户提供丰富的多媒体体验。",
+            "categories": [
+                "media"
+            ],
+            "description": "Emby是一款优秀的媒体服务器软件，致力于为用户提供丰富的多媒体体验。",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://emby.media",
+            "location": "/home/runner/work/catalog/catalog/stable/alist",
+            "latest_version": "1.0.1",
+            "latest_app_version": "latest",
+            "latest_human_version": "latest",
+            "last_update": "2023-01-01 00:00:00",
+            "name": "emby",
+            "recommended": false,
+            "title": "Emby",
+            "maintainers": [
+                {
+                    "email": "benz1",
+                    "name": "benz1",
+                    "url": "benz1"
+                }
+            ],
+            "tags": [
+                "media"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://emby.media"
+            ],
+            "icon_url": "https://truecharts.org/img/hotlink-ok/chart-icons/emby.png"
         }
     }
 }
