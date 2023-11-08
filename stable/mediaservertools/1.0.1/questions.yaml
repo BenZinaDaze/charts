@@ -42,7 +42,7 @@ questions:
       default: true
 
   - variable: environmentVariables
-    label: "Moviepilot environment"
+    label: "Mediaservertools environment"
     group: "Configuration"
     schema:
       type: list
