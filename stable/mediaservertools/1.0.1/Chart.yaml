@@ -1,12 +1,12 @@
 apiVersion: v2
 dependencies:
-- name: common
-  repository: file://../../../library/common/2207.0.0
-  version: 2207.0.0
-description: MediaServerTools
-home: https://github.com/sleikang/MediaServerTools 
+  - name: common
+    repository: https://github.com/BenZinaDaze/charts
+    version: 2207.0.0
+description: Emby/Jellyfin/Plex 媒体中文自动同步
+home: https://github.com/sleikang/MediaServerTools
 icon: https://github.com/fluidicon.png
-keywords:
-- media
+sources:
+  - "https://github.com/sleikang/MediaServerTools"
 name: mediaservertools
 version: 1.0.1

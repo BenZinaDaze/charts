@@ -34,6 +34,34 @@ questions:
       type: boolean
       default: true
 
+  - variable: AUTO_UPDATE_CN
+    label: "AUTO_UPDATE_CN"
+    group: Configuration
+    schema:
+      type: boolean
+      default: true
+
+  - variable: environmentVariables
+    label: "Moviepilot environment"
+    group: "Configuration"
+    schema:
+      type: list
+      default: []
+      items:
+        - variable: environmentVariable
+          label: "Environment Variable"
+          schema:
+            type: dict
+            attrs:
+              - variable: name
+                label: "Name"
+                schema:
+                  type: string
+              - variable: value
+                label: "Value"
+                schema:
+                  type: string
+                  
   - variable: appVolumeMounts
     label: "Config Storage"
     group: "Storage"

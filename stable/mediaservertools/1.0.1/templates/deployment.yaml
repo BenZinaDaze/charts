@@ -41,6 +41,7 @@ spec:
             {{ $envList = mustAppend $envList (dict "name" "PUID" "value" (printf "%d" (.Values.ownerUID | int))) }}
             {{ $envList = mustAppend $envList (dict "name" "PGID" "value" (printf "%d" (.Values.ownerGID | int))) }}
             {{ $envList = mustAppend $envList (dict "name" "MediaServerTools_AUTO_UPDATE" "value" (.Values.AUTO_UPDATE)) }}
+            {{ $envList = mustAppend $envList (dict "name" "MediaServerTools_CN_UPDATE" "value" (.Values.AUTO_UPDATE_CN)) }}
             {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) | nindent 12 }}
       volumes: {{ include "common.storage.configureAppVolumes" .Values | nindent 8 }}
       {{ range $index, $hostPathConfiguration := .Values.extraAppVolumeMounts }}
