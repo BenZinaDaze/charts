@@ -265,6 +265,39 @@
                 "https://github.com/Jackett/Jackett"
             ],
             "icon_url": "https://truecharts.org/img/hotlink-ok/chart-icons/jackett.png"
+        },
+        "thelounge": {
+            "app_readme": "The Lounge, modern web IRC client designed for self-hosting",
+            "categories": [
+                "irc"
+            ],
+            "description": "The Lounge, modern web IRC client designed for self-hosting",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/thelounge/thelounge",
+            "location": "/home/runner/work/catalog/catalog/stable/thelounge",
+            "latest_version": "1.0.1",
+            "latest_app_version": "latest",
+            "latest_human_version": "latest",
+            "last_update": "2023-01-01 00:00:00",
+            "name": "thelounge",
+            "recommended": false,
+            "title": "Thelounge",
+            "maintainers": [
+                {
+                    "email": "thelounge",
+                    "name": "thelounge",
+                    "url": "https://github.com/thelounge/thelounge"
+                }
+            ],
+            "tags": [
+                "irc"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://github.com/thelounge/thelounge"
+            ],
+            "icon_url": "https://truecharts.org/img/hotlink-ok/chart-icons/thelounge.png"
         }
     }
 }

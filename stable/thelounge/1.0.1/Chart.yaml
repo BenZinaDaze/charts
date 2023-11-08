@@ -1,0 +1,12 @@
+apiVersion: v2
+dependencies:
+  - name: common
+    repository: https://library-charts.truecharts.org
+    version: 14.2.3
+description: The Lounge, modern web IRC client designed for self-hosting
+home: https://truecharts.org/charts/stable/thelounge
+icon: https://truecharts.org/img/hotlink-ok/chart-icons/thelounge.png
+sources:
+  - https://github.com/thelounge/thelounge
+name: thelounge
+version: 1.0.1
