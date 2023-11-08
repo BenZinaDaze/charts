@@ -232,6 +232,39 @@
                 "https://github.com/sleikang/MediaServerTools"
             ],
             "icon_url": "https://github.com/fluidicon.png"
+        },
+        "jackett": {
+            "app_readme": "API Support for your favorite torrent trackers",
+            "categories": [
+                "tools"
+            ],
+            "description": "API Support for your favorite torrent trackers",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/Jackett/Jackett",
+            "location": "/home/runner/work/catalog/catalog/stable/alist",
+            "latest_version": "1.0.1",
+            "latest_app_version": "latest",
+            "latest_human_version": "latest",
+            "last_update": "2023-01-01 00:00:00",
+            "name": "jackett",
+            "recommended": false,
+            "title": "Jackett",
+            "maintainers": [
+                {
+                    "email": "Jackett",
+                    "name": "Jackett",
+                    "url": "https://github.com/Jackett/Jackett"
+                }
+            ],
+            "tags": [
+                "tools"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://github.com/Jackett/Jackett"
+            ],
+            "icon_url": "https://truecharts.org/img/hotlink-ok/chart-icons/jackett.png"
         }
     }
 }
