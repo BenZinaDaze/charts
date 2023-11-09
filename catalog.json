@@ -298,6 +298,41 @@
                 "https://github.com/thelounge/thelounge"
             ],
             "icon_url": "https://truecharts.org/img/hotlink-ok/chart-icons/thelounge.png"
+        },
+        "chinesesubfinder": {
+            "app_readme": "本项目的初衷仅仅是想自动化搞定限定条件下 中文 字幕，在第三方的网站或者接口的下载。",
+            "categories": [
+                "tools"
+            ],
+            "description": "本项目的初衷仅仅是想自动化搞定限定条件下 中文 字幕，在第三方的网站或者接口的下载。",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/ChineseSubFinder/ChineseSubFinder",
+            "location": "/home/runner/work/catalog/catalog/stable/thelounge",
+            "latest_version": "1.0.1",
+            "latest_app_version": "latest",
+            "latest_human_version": "latest",
+            "last_update": "2023-01-01 00:00:00",
+            "name": "chinesesubfinder",
+            "recommended": false,
+            "title": "Chinesesubfinder",
+            "maintainers": [
+                {
+                    "email": "allanpk716",
+                    "name": "allanpk716",
+                    "url": "https://github.com/ChineseSubFinder/ChineseSubFinder"
+                }
+            ],
+            "tags": [
+                "sub",
+                "tools"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://github.com/ChineseSubFinder/ChineseSubFinder",
+                "https://hub.docker.com/r/allanpk716/chinesesubfinder"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/ChineseSubFinder/ChineseSubFinder/master/logo/logo.ico"
         }
     }
 }

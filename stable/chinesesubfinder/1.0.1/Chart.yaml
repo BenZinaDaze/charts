@@ -1,0 +1,13 @@
+apiVersion: v2
+dependencies:
+  - name: common
+    repository: https://github.com/BenZinaDaze/charts
+    version: 2207.0.0
+description: 自动化搞定限定条件下中文字幕下载。
+home: https://github.com/allanpk716/ChineseSubFinder
+icon: https://raw.githubusercontent.com/ChineseSubFinder/ChineseSubFinder/master/logo/logo.ico
+sources:
+  - https://github.com/ChineseSubFinder/ChineseSubFinder
+  - https://hub.docker.com/r/allanpk716/chinesesubfinder
+name: chinesesubfinder
+version: 1.0.1

@@ -1,4 +1,0 @@
-image:
-  pullPolicy: IfNotPresent
-  repository: allanpk716/chinesesubfinder
-  tag: v0.52.3@sha256:1e64913ee4adb51645d82f5f38aa6921a02c04b1838eb87a32d721110d344a45
