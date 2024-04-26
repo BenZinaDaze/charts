@@ -1,0 +1,22 @@
+image:
+  repository: amilys/embyserver
+  pullPolicy: IfNotPresent
+  tag: latest
+
+securityContext:
+  readOnlyRootFilesystem: false
+
+service:
+  main:
+    ports:
+      main:
+        port: 8096
+        targetPort: 8096
+
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+
+portal:
+  enabled: true

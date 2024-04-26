@@ -45,10 +45,10 @@
             "healthy_error": null,
             "home": "https://emby.media",
             "location": "/home/runner/work/catalog/catalog/stable/emby",
-            "latest_version": "1.0.2",
+            "latest_version": "1.0.3",
             "latest_app_version": "latest",
             "latest_human_version": "latest",
-            "last_update": "2024-02-13 14:04:00",
+            "last_update": "2024-04-26 15:55:41",
             "name": "emby",
             "recommended": false,
             "title": "Emby",
@@ -66,7 +66,7 @@
             "sources": [
                 "https://emby.media"
             ],
-            "icon_url": "https://truecharts.org/img/hotlink-ok/chart-icons/emby.png"
+            "icon_url": "https://emby.media/apple-touch-icon-120x120.png"
         },
         "moviepilot": {
             "app_readme": "NAS媒体库自动化管理工具。",
