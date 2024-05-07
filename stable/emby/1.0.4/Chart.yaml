@@ -7,7 +7,7 @@ annotations:
   truecharts.org/min_helm_version: "3.11"
   truecharts.org/train: stable
 apiVersion: v2
-appVersion: 4.8.6.0
+appVersion: latest
 dependencies:
   - name: common
     version: 23.0.0
@@ -31,8 +31,6 @@ maintainers:
     url: https://truecharts.org
 name: emby
 sources:
-  - https://github.com/linuxserver/docker-emby.git
-  - https://github.com/truecharts/charts/tree/master/charts/stable/emby
-  - https://ghcr.io/geek-cookbook/emby
+  - https://hub.docker.com/r/amilys/embyserver
 type: application
-version: 19.0.6
+version: 1.0.4
